@@ -3,7 +3,7 @@ using NetCord.Gateway;
 using NetCord.Rest;
 using NetCord.Services.ApplicationCommands;
 
-namespace kang_nangkring;
+namespace kang_nangkring.Commands;
 
 [SlashCommand("kang-nangkring", "Command utama untuk mengatur bot kang nangkring", Contexts = [InteractionContextType.Guild])]
 public class KangNangkringCommand : ApplicationCommandModule<ApplicationCommandContext>
@@ -16,7 +16,7 @@ public class KangNangkringCommand : ApplicationCommandModule<ApplicationCommandC
         EmbedProperties properties = new EmbedProperties();
         properties.WithTitle("📋 Daftar Perintah Kang Nangkring");
 
-        var description = 
+        string description = 
         "- `/kang-nangkring help` : Menampilkan daftar perintah Kang Nangkring.\n" +
         "- `/kang-nangkring setnongki <voice_channel>` : Meluncur ke Voice Channel (TAB untuk autocomplete).\n" +
         "- `/kang-nangkring leave` : Mengeluarkan bot dari voice channel.";
@@ -30,7 +30,7 @@ public class KangNangkringCommand : ApplicationCommandModule<ApplicationCommandC
         [SlashCommandParameter(Name = "voice_channel", Description = "Pilih voice channel")] 
         VoiceGuildChannel channel)
     {
-        var client = Context.Client;
+        GatewayClient client = Context.Client;
         var guild = Context.Guild;
 
         if (guild == null)
@@ -47,7 +47,7 @@ public class KangNangkringCommand : ApplicationCommandModule<ApplicationCommandC
     [SubSlashCommand("leave", "Bot keluar dari voice channel")]
     public async Task LeaveAsync()
     {
-        var client = Context.Client;
+        GatewayClient client = Context.Client;
         var guildId = Context.Interaction.GuildId;
 
         if (guildId.HasValue)
