@@ -23,8 +23,8 @@ jobs:
       with:
         folder: ./publish
         branch: deploy # Hasil build ditaruh di branch ini
-    
-    - name: Deploy to VPS via SSH
+        
+    - name: Deploy via SSH
       uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{ secrets.HOST }}
@@ -34,4 +34,12 @@ jobs:
           cd /root/kang-nangkring
           git fetch origin deploy
           git reset --hard origin/deploy
-          sudo systemctl restart kang-nangkring
+          # Build image dan jalankan
+          docker build -t bot-nangkring .
+          docker stop bot-nangkring || true
+          docker rm bot-nangkring || true
+          docker run -d \
+            --name bot-nangkring \
+            --restart always \
+            -e DiscordToken=${{ secrets.DISCORD_TOKEN }} \
+            bot-nangkring

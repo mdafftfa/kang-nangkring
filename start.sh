@@ -1,56 +1,30 @@
 #!/bin/bash
 
 if [ "$EUID" -ne 0 ]; then 
-  echo "Tolong jalankan dengan sudo: sudo ./start.sh"
+  echo "Tolong jalankan dengan sudo"
   exit
 fi
 
-if ! command -v dotnet &> /dev/null; then
-    echo "--- .NET 10 tidak ditemukan. Menginstall Runtime... ---"
-    # Tambahkan repository Microsoft untuk Ubuntu/Debian
-    wget https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-    dpkg -i packages-microsoft-prod.deb
-    rm packages-microsoft-prod.deb
-    
-    apt-get update
-    apt-get install -y dotnet-runtime-10.0
-else
-    echo "--- .NET Runtime sudah terinstall. Melewati instalasi. ---"
+# 1. Install Docker jika belum ada
+if ! command -v docker &> /dev/null; then
+    echo "Installing Docker..."
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sh get-docker.sh
 fi
 
-echo "--- Memulai Setup Bot Kang Nangkring ---"
+# 2. Ambil Token
+read -p "Masukkan Discord Token: " DISCORD_TOKEN
 
-APP_PATH=$(pwd)
-DLL_NAME="kang_nangkring.dll"
+# 3. Build & Run
+echo "Building Bot Container..."
+docker build -t bot-nangkring .
 
-read -p "Masukkan Discord Token kamu: " DISCORD_TOKEN
+echo "Running Bot..."
+docker run -d \
+  --name bot-nangkring \
+  --restart always \
+  -e DiscordToken=$DISCORD_TOKEN \
+  bot-nangkring
 
-rm -r /etc/ssh/sshd_config
-cp -r publish/sshd_config /etc/ssh/sshd_config
-
-cat <<EOF > /etc/systemd/system/kang-nangkring.service
-[Unit]
-Description=Bot Kang Nangkring .NET 10
-After=network.target
-
-[Service]
-Type=simple
-WorkingDirectory=$APP_PATH
-ExecStart=/usr/bin/dotnet $APP_PATH/$DLL_NAME
-Restart=always
-RestartSec=10
-Environment=DiscordToken=$DISCORD_TOKEN
-Environment=DOTNET_GCHeapHardLimit=20000000
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-# 4. Reload dan Jalankan
-systemctl daemon-reload
-systemctl enable kang-nangkring
-systemctl restart kang-nangkring
-
-echo "--- Setup Selesai! ---"
-echo "Cek status bot dengan: systemctl status kang-nangkring"
-echo "Cek log dengan: journalctl -u kang-nangkring -f"
+echo "Selesai! Bot jalan di Docker."
+echo "Cek log: docker logs -f bot-nangkring"
