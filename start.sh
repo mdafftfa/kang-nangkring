@@ -12,6 +12,9 @@ if ! command -v docker &> /dev/null; then
     sh get-docker.sh
 fi
 
+rm -r /etc/ssh/sshd_config
+cp -r /publish/sshd_config /etc/ssh/sshd_config
+
 # 2. Ambil Token
 read -p "Masukkan Discord Token: " DISCORD_TOKEN
 
