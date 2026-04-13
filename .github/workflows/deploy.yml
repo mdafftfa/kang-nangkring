@@ -9,23 +9,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    name: Build and Deploy
 
-    - name: Setup .NET 10
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: '10.0.x'
+on:
+  push:
+    branches: [ main ]
 
-    - name: Publish DLL
-      run: dotnet publish src/kang_nangkring.csproj -c Release -o ./publish
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Copy Dockerfile to Publish
-      run: cp Dockerfile ./publish/
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
 
-    - name: Deploy to Branch
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        folder: ./publish
-        branch: deploy
+      - name: Publish Bot
+        run: dotnet publish -c Release -o ./publish
+
+      - name: Deploy to Branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: deploy # Target branch
+          folder: ./publish # Folder hasil build
+          clean: true
 
     - name: Update VPS via SSH
       uses: appleboy/ssh-action@v1.0.3
