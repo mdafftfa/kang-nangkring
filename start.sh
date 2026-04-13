@@ -1,26 +1,29 @@
 #!/bin/bash
-# start.sh versi Docker
+# start.sh versi Docker - CLEAN VERSION
 
 if [ "$EUID" -ne 0 ]; then 
-  echo "Tolong jalankan dengan sudo"
+  echo "Tolong jalankan dengan sudo: sudo ./start.sh"
   exit
 fi
 
-rm -r /etc/ssh/sshd_config
-cp -r /publish/sshd_config /etc/ssh/sshd_config
-
-# 1. Ambil Token (Hanya dijalankan manual sekali)
-read -p "Masukkan Discord Token: " DISCORD_TOKEN
+# 1. Ambil Token
+read -p "Masukkan Discord Token kamu: " DISCORD_TOKEN
 
 # 2. Build Image
+echo "--- Membangun Docker Image ---"
 docker build -t kang-nangkring .
 
-# 3. Jalankan Container
+# 3. Hapus container lama jika ada
+docker stop bot-nangkring 2>/dev/null
+docker rm bot-nangkring 2>/dev/null
+
+# 4. Jalankan Container
+echo "--- Menjalankan Bot di Docker ---"
 docker run -d \
   --name bot-nangkring \
   --restart always \
   -e DiscordToken=$DISCORD_TOKEN \
   kang-nangkring
 
-echo "✅ Bot berhasil dijalankan di Docker!"
-echo "Gunakan 'docker logs -f bot-nangkring' untuk melihat log."
+echo "✅ Bot berhasil dijalankan!"
+echo "Cek log dengan: docker logs -f bot-nangkring"
