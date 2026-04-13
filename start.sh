@@ -1,29 +1,25 @@
 #!/bin/bash
-# start.sh versi Docker - CLEAN VERSION
-
-if [ "$EUID" -ne 0 ]; then 
-  echo "Tolong jalankan dengan sudo: sudo ./start.sh"
-  exit
+if [ "\$EUID" -ne 0 ]; then 
+  echo "Tolong jalankan dengan sudo"
+  exit 1
 fi
 
-# 1. Ambil Token
 read -p "Masukkan Discord Token kamu: " DISCORD_TOKEN
 
-# 2. Build Image
 echo "--- Membangun Docker Image ---"
-docker build -t kang-nangkring .
+# Menambahkan set -e agar script berhenti jika docker build gagal
+docker build -t kang-nangkring . || { echo "❌ Build Gagal! Periksa error di atas."; exit 1; }
 
-# 3. Hapus container lama jika ada
+echo "--- Membersihkan Container Lama ---"
 docker stop bot-nangkring 2>/dev/null
 docker rm bot-nangkring 2>/dev/null
 
-# 4. Jalankan Container
 echo "--- Menjalankan Bot di Docker ---"
-docker run -d \
-  --name bot-nangkring \
-  --restart always \
-  -e DiscordToken=$DISCORD_TOKEN \
+docker run -d \\
+  --name bot-nangkring \\
+  --restart always \\
+  -e DiscordToken=\$DISCORD_TOKEN \\
   kang-nangkring
 
 echo "✅ Bot berhasil dijalankan!"
-echo "Cek log dengan: docker logs -f bot-nangkring"
+echo "Gunakan 'docker logs -f bot-nangkring' untuk melihat log."
