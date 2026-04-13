@@ -8,6 +8,7 @@ WORKDIR /app
 FROM base AS final
 WORKDIR /app
 COPY . .
+COPY ./publish .
 
 # Optimasi RAM .NET untuk Docker
 ENV DOTNET_GCHeapHardLimit=20000000

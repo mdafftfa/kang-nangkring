@@ -1,33 +1,50 @@
-#!/bin/bash
+name: Build and Release
 
-if [ "$EUID" -ne 0 ]; then 
-  echo "Tolong jalankan dengan sudo"
-  exit
-fi
+on:
+  push:
+    branches: [ main ]
 
-# 1. Install Docker jika belum ada
-if ! command -v docker &> /dev/null; then
-    echo "Installing Docker..."
-    curl -fsSL https://get.docker.com -o get-docker.sh
-    sh get-docker.sh
-fi
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
 
-rm -r /etc/ssh/sshd_config
-cp -r /publish/sshd_config /etc/ssh/sshd_config
+    - name: Setup .NET 10
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
 
-# 2. Ambil Token
-read -p "Masukkan Discord Token: " DISCORD_TOKEN
+    - name: Publish DLL
+      run: dotnet publish src/kang_nangkring.csproj -c Release -o ./publish
 
-# 3. Build & Run
-echo "Building Bot Container..."
-docker build -t bot-nangkring .
+    - name: Copy Dockerfile to Publish
+      run: cp Dockerfile ./publish/
 
-echo "Running Bot..."
-docker run -d \
-  --name bot-nangkring \
-  --restart always \
-  -e DiscordToken=$DISCORD_TOKEN \
-  bot-nangkring
+    - name: Deploy to Branch
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: ./publish
+        branch: deploy
 
-echo "Selesai! Bot jalan di Docker."
-echo "Cek log: docker logs -f bot-nangkring"
+    - name: Update VPS via SSH
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd ~/kang-nangkring
+          git fetch origin deploy
+          git reset --hard origin/deploy
+          # Build ulang image di VPS
+          docker build -t kang-nangkring .
+          # Stop & Hapus container lama (jika ada)
+          docker stop bot-nangkring || true
+          docker rm bot-nangkring || true
+          # Jalankan container baru
+          docker run -d \
+            --name bot-nangkring \
+            --restart always \
+            -e DiscordToken=${{ secrets.DISCORD_TOKEN }} \
+            kang-nangkring
