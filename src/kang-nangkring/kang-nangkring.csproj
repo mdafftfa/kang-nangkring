@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-kang_nangkring-d6337977-4354-4d06-8171-ebe605520966</UserSecretsId>
+    <RootNamespace>kang_nangkring</RootNamespace>
+
+    <TieredCompilation>true</TieredCompilation>
+    <PublishTrimmed>false</PublishTrimmed>
+    <TrimMode>partial</TrimMode>
+    <PublishReadyToRunComposite>true</PublishReadyToRunComposite>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <TieredPGO>true</TieredPGO>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <GarbageCollectionAdaptationMode>1</GarbageCollectionAdaptationMode>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Discord.Net" Version="3.19.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
+  </ItemGroup>
+</Project>
