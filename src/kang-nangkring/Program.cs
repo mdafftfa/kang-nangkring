@@ -11,7 +11,7 @@ var builder = Host.CreateApplicationBuilder(args);
 
 builder.Services.AddDiscordGateway(options =>
 {
-    options.Token = "MTQ5MzE0NzY2NTczNzcxMTYzNg.GFOwkk._dErwgg0XJBLAJD_XXqxahie712xlHVg9Zdzog";
+    options.Token = builder.Configuration["DiscordToken"];
     options.Intents = NetCord.Gateway.GatewayIntents.Guilds | NetCord.Gateway.GatewayIntents.GuildVoiceStates;
 }
 );

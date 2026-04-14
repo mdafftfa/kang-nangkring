@@ -1,0 +1,5 @@
+src/kang-nangkring/bin/
+src/kang-nangkring/obj/
+publish/
+src/kang-nangkring/appsettings.json
+.env
