@@ -34,17 +34,25 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd ~/kang-nangkring
+            # Masuk ke folder project
+            cd ~/kang-nangkring || exit
+            
+            # Update source code dari branch deploy
             git fetch origin deploy
             git reset --hard origin/deploy
-            # Build ulang image di VPS
+            
+            # Build image baru
             docker build -t kang-nangkring .
-            # Stop & Hapus container lama (jika ada)
-            docker stop bot-nangkring || true
-            docker rm bot-nangkring || true
-            # Jalankan container baru
+            
+            # Hapus container lama jika ada
+            docker stop bot-nangkring 2>/dev/null || true
+            docker rm bot-nangkring 2>/dev/null || true
+            
+            # Jalankan bot baru
+            # Note: Tambahkan --net=host jika bot butuh akses network VPS langsung
             docker run -d \
               --name bot-nangkring \
               --restart always \
-              -e DiscordToken=${{ secrets.DISCORD_TOKEN }} \
+              --net=host \
+              -e DiscordToken="${{ secrets.DISCORD_TOKEN }}" \
               kang-nangkring
