@@ -2,7 +2,9 @@
 
 if [ -f .env ]; then
     echo "--- Memuat konfigurasi dari .env ---"
-    export $(grep -v '^#' .env | xargs)
+    set -a
+    source .env
+    set +a
 else
     echo "--- PERINGATAN: File .env tidak ditemukan! ---"
 fi
