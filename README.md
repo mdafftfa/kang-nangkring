@@ -39,7 +39,7 @@ Masukkan Discord Token Anda:
 - `chmod +x start.sh`
 - `./start.sh`
 - `CTRL + A + D` (Keluar dari screen)
-- `screen -x kang-nangkring` (Keluar dari screen kang-nangkring)
+- `screen -x kang-nangkring` (Untuk masuk kembali ke screen kang-nangkring)
 
 ---
 
