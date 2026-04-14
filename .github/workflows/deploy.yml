@@ -36,7 +36,8 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          envs: DISCORD_TOKEN
+          env:
+            DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           debug: true
           script: |
             # Masuk ke folder project
