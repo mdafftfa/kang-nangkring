@@ -1,4 +1,4 @@
-# ☕ Kang Nangkring Bot (Discord)
+# ☕ Kang Nangkring
 
 Bot Discord sederhana 24/7 Nangkring di Voice Channel berbasis .NET untuk kebutuhan komunitas—ringan, cepat, dan cocok untuk pemula.
 
