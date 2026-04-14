@@ -19,8 +19,8 @@ jobs:
       - name: Publish Bot
         run: |
           dotnet publish -c Release -o ./publish
-          cp Dockerfile ./publish/  # Tambahkan baris ini untuk copy Dockerfile
-          cp start.sh ./publish/   # Tambahkan ini juga agar skrip tetap ada di sana
+          cp Dockerfile ./publish/  
+          cp start.sh ./publish/  
 
       - name: Deploy to Branch
         uses: JamesIves/github-pages-deploy-action@v4
