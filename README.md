@@ -32,10 +32,10 @@ Masukkan Discord Token Anda:
 
 ## 📥 Cara Install & Run (Linux Only)
 
-git clone https://github.com/mdafftfa/kang-nangkring
-cd kang-nangkring
-chmod +x start.sh
-./start.sh
+- git clone https://github.com/mdafftfa/kang-nangkring
+- cd kang-nangkring
+- chmod +x start.sh
+- ./start.sh
 
 ---
 
