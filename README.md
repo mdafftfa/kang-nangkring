@@ -1,11 +1,11 @@
-# 🤖 Kang Nangkring
+# Kang Nangkring
 
 Bot Discord sederhana 24/7 Nangkring di Voice Channel berbasis .NET Worker + [NetCord](https://github.com/NetCordDev/NetCord/).
 Cocok untuk server komunitas, voice, dan automation ringan.
 
 ---
 
-## 🚀 Fitur
+## Fitur
 - Connect ke Discord Gateway
 - Support Application Commands
 - Fokus Guild & Voice State
@@ -13,7 +13,7 @@ Cocok untuk server komunitas, voice, dan automation ringan.
 
 ---
 
-## 📦 Requirement
+## Requirement
 - Linux (Ubuntu / Debian / VPS / WSL)
 - .NET 10 SDK / Runtime
 - Git
@@ -21,7 +21,7 @@ Cocok untuk server komunitas, voice, dan automation ringan.
 
 ---
 
-## 🔑 Setup Token Discord
+## Setup Token Discord
 Ambil token dari:
 https://discord.com/developers/applications
 
@@ -30,7 +30,7 @@ Masukkan Discord Token Anda:
 
 ---
 
-## 📥 Cara Install & Run (Linux Only)
+## Cara Install & Run (Linux Only)
 
 - `screen -R kang-nangkring` (Buat screen baru dengan nama kang-nangkring)
 - `cd /root` (Pastikan di /root folder agar mudah dicari)
@@ -43,7 +43,7 @@ Masukkan Discord Token Anda:
 
 ---
 
-## ⚙️ Cara Kerja Script
+## Cara Kerja Script
 
 start.sh akan:
 1. Minta input Discord Token
@@ -54,7 +54,7 @@ start.sh akan:
 
 ---
 
-## 🧠 Catatan Penting
+## Catatan Penting
 
 Intents yang dipakai:
 - Guilds
@@ -67,7 +67,7 @@ Optimasi aktif:
 
 ---
 
-## ❗ Troubleshooting
+## Troubleshooting
 
 - Cek token Discord benar
 - Pastikan internet aktif
@@ -75,5 +75,5 @@ Optimasi aktif:
 
 ---
 
-## 📜 License
+## License
 Free untuk belajar & komunitas.
