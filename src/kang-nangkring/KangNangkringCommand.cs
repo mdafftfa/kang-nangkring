@@ -7,27 +7,38 @@ using NetCord.Services.ApplicationCommands;
 namespace kang_nangkring;
 
 [SlashCommand("kang-nangkring", "Command utama untuk mengatur bot kang nangkring", Contexts = [InteractionContextType.Guild])]
-public class KangNangkringCommand : ApplicationCommandModule<SlashCommandContext>
+public class KangNangkringCommand : ApplicationCommandModule<ApplicationCommandContext>
 {
-    
+
+    [SubSlashCommand("help", "Melihat daftar perintah")]
+    public async Task HelpAsync()
+    {
+
+        EmbedProperties properties = new EmbedProperties();
+        properties.WithTitle("📋 Daftar Perintah Kang Nangkring");
+        properties.WithDescription("- /kang-nangkring help : Menampilkan daftar perintah Kang Nangkring.");
+        properties.WithDescription("- /kang-nangkring setnongki <voice_channel> : Meluncur ke Voice Channel");
+        properties.WithDescription("- /kang-nangkring leave : Mengeluarkan bot dari voice channel.");
+        await RespondAsync(InteractionCallback.Message(new InteractionMessageProperties().WithEmbeds([properties])));
+    }
+
     [SubSlashCommand("setnongki", "Set voice channel untuk nongkrong")]
     public async Task SetNongkiAsync(
-        [SlashCommandParameter(Name = "voice_channel_id", Description = "ID dari Voice Channel")] string voiceChannelId)
+        [SlashCommandParameter(Name = "voice_channel", Description = "Pilih voice channel")] 
+        VoiceGuildChannel channel)
     {
         var client = Context.Client;
         var guild = Context.Guild;
 
-        if (guild == null) return;
-
-        if (!ulong.TryParse(voiceChannelId, out var channelId))
+        if (guild == null)
         {
-            await RespondAsync(InteractionCallback.Message("ID Channel tidak valid!"));
+            await RespondAsync(InteractionCallback.Message("Perintah ini hanya bisa digunakan di dalam server."));
             return;
         }
 
-        await client.UpdateVoiceStateAsync(new VoiceStateProperties(guild.Id, channelId));
+        await client.UpdateVoiceStateAsync(new VoiceStateProperties(guild.Id, channel.Id));
 
-        await RespondAsync(InteractionCallback.Message($"Siapp, sedang meluncur ke channel ID: {voiceChannelId}"));
+        await RespondAsync(InteractionCallback.Message($"Siapp, sedang meluncur ke channel **{channel.Name}**"));
     }
 
     [SubSlashCommand("leave", "Bot keluar dari voice channel")]
@@ -39,7 +50,6 @@ public class KangNangkringCommand : ApplicationCommandModule<SlashCommandContext
         if (guildId.HasValue)
         {
             await client.UpdateVoiceStateAsync(new VoiceStateProperties(guildId.Value, null));
-            
             await RespondAsync(InteractionCallback.Message("Bot telah pamit dari channel nongki."));
         }
     }

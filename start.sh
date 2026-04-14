@@ -1,13 +1,10 @@
 #!/bin/bash
 
-if [ -f .env ]; then
-    echo "--- Memuat konfigurasi dari .env ---"
-    set -a
-    source .env
-    set +a
-else
-    echo "--- PERINGATAN: File .env tidak ditemukan! ---"
-fi
+echo -n "Masukkan Discord Token Anda: "
+read DISCORD_TOKEN
+echo ""
+
+export Discord__Token=$DISCORD_TOKEN
 
 if ! command -v dotnet &> /dev/null || [[ "$(dotnet --version)" != 10.* ]]; then
     echo "--- .NET 10 tidak ditemukan. Mengunduh installer... ---"
