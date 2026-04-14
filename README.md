@@ -32,10 +32,14 @@ Masukkan Discord Token Anda:
 
 ## 📥 Cara Install & Run (Linux Only)
 
-- git clone https://github.com/mdafftfa/kang-nangkring
-- cd kang-nangkring
-- chmod +x start.sh
-- ./start.sh
+- `screen -R kang-nangkring` (Buat screen baru dengan nama kang-nangkring)
+- `cd /root` (Pastikan di /root folder agar mudah dicari)
+- `git clone https://github.com/mdafftfa/kang-nangkring`
+- `cd kang-nangkring`
+- `chmod +x start.sh`
+- `./start.sh`
+- `CTRL + A + D` (Keluar dari screen)
+- `screen -x kang-nangkring` (Keluar dari screen kang-nangkring)
 
 ---
 
