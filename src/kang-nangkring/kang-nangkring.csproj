@@ -19,7 +19,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Discord.Net" Version="3.19.1" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
+    <PackageReference Include="NetCord" Version="1.0.0-alpha.484" />
+    <PackageReference Include="NetCord.Hosting" Version="1.0.0-alpha.484" />
+    <PackageReference Include="NetCord.Hosting.AspNetCore" Version="1.0.0-alpha.484" />
+    <PackageReference Include="NetCord.Hosting.Services" Version="1.0.0-alpha.484" />
+    <PackageReference Include="NetCord.Services" Version="1.0.0-alpha.484" />
   </ItemGroup>
 </Project>

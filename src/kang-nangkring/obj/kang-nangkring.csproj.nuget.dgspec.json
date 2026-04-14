@@ -44,13 +44,25 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "dependencies": {
-            "Discord.Net": {
+            "NetCord": {
               "target": "Package",
-              "version": "[3.19.1, )"
+              "version": "[1.0.0-alpha.484, )"
             },
-            "Microsoft.Extensions.Hosting": {
+            "NetCord.Hosting": {
               "target": "Package",
-              "version": "[10.0.0, )"
+              "version": "[1.0.0-alpha.484, )"
+            },
+            "NetCord.Hosting.AspNetCore": {
+              "target": "Package",
+              "version": "[1.0.0-alpha.484, )"
+            },
+            "NetCord.Hosting.Services": {
+              "target": "Package",
+              "version": "[1.0.0-alpha.484, )"
+            },
+            "NetCord.Services": {
+              "target": "Package",
+              "version": "[1.0.0-alpha.484, )"
             }
           },
           "imports": [
