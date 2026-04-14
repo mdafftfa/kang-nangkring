@@ -4,11 +4,6 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-# 1. Tarik file hasil build (.dll) terbaru dari branch deploy
-echo "--- Menarik Update dari GitHub (Branch Deploy) ---"
-git fetch origin deploy
-git reset --hard origin/deploy
-
 # 2. Build image Docker (sangat cepat karena hanya COPY file saja)
 echo "--- Mengupdate Docker Image ---"
 docker build -t kang-nangkring .
