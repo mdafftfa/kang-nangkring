@@ -1,4 +1,4 @@
-# 🤖 Kang Nangkring Discord Bot
+# 🤖 Kang Nangkring
 
 Bot Discord sederhana 24/7 Nangkring di Voice Channel berbasis .NET Worker + NetCord.
 Cocok untuk server komunitas, voice, dan automation ringan.
@@ -50,16 +50,6 @@ start.sh akan:
 
 ---
 
-## 📁 Struktur Project
-
-src/
- └── kang-nangkring/
-      ├── Program.cs
-      ├── Modules/
-      └── kang-nangkring.csproj
-
----
-
 ## 🧠 Catatan Penting
 
 Intents yang dipakai:
@@ -70,13 +60,6 @@ Optimasi aktif:
 - Tiered Compilation
 - ReadyToRun (R2R Composite)
 - PGO
-
----
-
-## 🧑‍🌾 Filosofi Kang Nangkring
-
-Bot ini dibuat ringan, santai, tapi tetap kerja keras.
-Seperti orang Jawa: nangkring tapi produktif 😄
 
 ---
 
