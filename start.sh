@@ -6,7 +6,8 @@ fi
 
 # 1. Tarik file hasil build (.dll) terbaru dari branch deploy
 echo "--- Menarik Update dari GitHub (Branch Deploy) ---"
-git pull origin deploy
+git fetch origin deploy
+git reset --hard origin/deploy
 
 # 2. Build image Docker (sangat cepat karena hanya COPY file saja)
 echo "--- Mengupdate Docker Image ---"
