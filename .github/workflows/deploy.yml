@@ -36,29 +36,22 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: DISCORD_TOKEN # Gunakan fitur bawaan envs
           debug: true
           script: |
-            # Masuk ke folder project
             cd ~/kang-nangkring || exit
-            
-            # Update source code dari branch deploy
             git fetch origin deploy
             git reset --hard origin/deploy
-            
-            # Build image baru
             docker build -t kang-nangkring .
-            
-            # Hapus container lama jika ada
             docker stop bot-nangkring 2>/dev/null || true
             docker rm bot-nangkring 2>/dev/null || true
-
-            export DISCORD_TOKEN='${{ secrets.DISCORD_TOKEN }}'
             
-            # Jalankan bot baru
-            # Note: Tambahkan --net=host jika bot butuh akses network VPS langsung
+            # Jalankan docker menggunakan variabel yang dikirim dari envs
             docker run -d \
               --name bot-nangkring \
               --restart always \
               --net=host \
               -e DiscordToken="$DISCORD_TOKEN" \
               kang-nangkring
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
