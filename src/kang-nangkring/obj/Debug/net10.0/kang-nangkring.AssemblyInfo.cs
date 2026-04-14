@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("dotnet-kang_nangkring-d6337977-4354-4d06-8171-ebe605520966")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("kang-nangkring")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a9907a823730a6ccc8573b0b57d8bcf36b529ee")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a8e2d7c8e77fd81480903cb7b422292c892ad58f")]
 [assembly: System.Reflection.AssemblyProductAttribute("kang-nangkring")]
 [assembly: System.Reflection.AssemblyTitleAttribute("kang-nangkring")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
