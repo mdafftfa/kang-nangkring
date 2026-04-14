@@ -30,5 +30,3 @@ docker run -d \
   --net=host \
   -e DiscordToken=$DISCORD_TOKEN \
   kang-nangkring
-
-echo "✅ Kang Nangkring berhasil diupdate dan dijalankan!"

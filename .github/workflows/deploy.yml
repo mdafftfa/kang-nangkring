@@ -2,19 +2,8 @@ name: Build and Release
 
 on:
   push:
-    branches: [ main ]
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    name: Build and Deploy
-
-on:
-  push:
-    branches: [ main ]
-
+    branches: [ MASTER ]
+    
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,7 +14,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '10.0.x'
 
       - name: Publish Bot
         run: dotnet publish -c Release -o ./publish
@@ -33,29 +22,29 @@ jobs:
       - name: Deploy to Branch
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: deploy # Target branch
-          folder: ./publish # Folder hasil build
+          token: ${{ secrets.GH_TOKEN }}
+          branch: deploy
+          folder: ./publish
           clean: true
 
-    - name: Update VPS via SSH
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: |
-          cd ~/kang-nangkring
-          git fetch origin deploy
-          git reset --hard origin/deploy
-          # Build ulang image di VPS
-          docker build -t kang-nangkring .
-          # Stop & Hapus container lama (jika ada)
-          docker stop bot-nangkring || true
-          docker rm bot-nangkring || true
-          # Jalankan container baru
-          docker run -d \
-            --name bot-nangkring \
-            --restart always \
-            -e DiscordToken=${{ secrets.DISCORD_TOKEN }} \
-            kang-nangkring
+      - name: Update VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/kang-nangkring
+            git fetch origin deploy
+            git reset --hard origin/deploy
+            # Build ulang image di VPS
+            docker build -t kang-nangkring .
+            # Stop & Hapus container lama (jika ada)
+            docker stop bot-nangkring || true
+            docker rm bot-nangkring || true
+            # Jalankan container baru
+            docker run -d \
+              --name bot-nangkring \
+              --restart always \
+              -e DiscordToken=${{ secrets.DISCORD_TOKEN }} \
+              kang-nangkring
