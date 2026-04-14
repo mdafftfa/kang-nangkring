@@ -80,7 +80,7 @@ public class Worker(ILogger<Worker> logger, IConfiguration config) : BackgroundS
                     }
                 } else if (subCommand.Name == "help")
                 {
-                    await command.RespondAsync("Gunakan `/kang-nangkring setnongki {voice_channel}`");
+                    await command.FollowupAsync("Gunakan `/kang-nangkring setnongki [channel]` untuk mulai nangkring!");
                 }
             });
         };
