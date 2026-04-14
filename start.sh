@@ -1,36 +1,36 @@
 #!/bin/bash
-if [ "$EUID" -ne 0 ]; then 
-  echo "Tolong jalankan dengan sudo"
-  exit 1
+
+# 1. Cek apakah .NET 10 sudah terinstall
+if ! command -v dotnet &> /dev/null || [[ "$(dotnet --version)" != 10.* ]]; then
+    echo "--- .NET 10 tidak ditemukan. Mengunduh installer... ---"
+    # Menggunakan official install script dari Microsoft
+    curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 10.0
+    
+    # Menambahkan dotnet ke PATH untuk sesi ini
+    export DOTNET_ROOT=$HOME/.dotnet
+    export PATH=$PATH:$HOME/.dotnet
 fi
 
-wget https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-dpkg -i packages-microsoft-prod.deb
-rm packages-microsoft-prod.deb
+# 2. Menentukan folder output
+PUBLISH_DIR="publish"
+PROJECT_NAME="kang-nangkring.dll"
 
-# Update dan Install SDK 10
-apt-get update
-apt-get install -y dotnet-sdk-10.0
+echo "--- Memulai proses Build & Publish (R2R Composite + PGO) ---"
 
-# 2. Build image Docker (sangat cepat karena hanya COPY file saja)
-echo "--- Mengupdate Docker Image ---"
-docker build -t kang-nangkring .
+# 3. Melakukan Publish
+# --self-contained false: Menggunakan runtime yang ada (lebih cepat jika SDK sudah ada)
+# -r: Runtime Identifier (sesuaikan linux-x64 jika menggunakan arsitektur lain)
+# -c Release: Wajib untuk performa
+dotnet publish -c Release -r linux-x64 --self-contained false -o $PUBLISH_DIR
 
-# 3. Membersihkan Container lama
-echo "--- Membersihkan Container Lama ---"
-docker stop bot-nangkring 2>/dev/null
-docker rm bot-nangkring 2>/dev/null
-
-# 4. Input Token jika belum ada di environment
-if [ -z "$DISCORD_TOKEN" ]; then
-    read -p "Masukkan Discord Token kamu: " DISCORD_TOKEN
+# 4. Menjalankan aplikasi
+if [ -f "$PUBLISH_DIR/$PROJECT_NAME" ]; then
+    echo "--- Aplikasi siap. Menjalankan $PROJECT_NAME ---"
+    echo "--- Mode: R2R Composite & Tiered PGO Aktif ---"
+    
+    # Menjalankan DLL dari folder publish
+    dotnet "$PUBLISH_DIR/$PROJECT_NAME"
+else
+    echo "Gagal menemukan $PROJECT_NAME di folder $PUBLISH_DIR"
+    exit 1
 fi
-
-# 5. Jalankan Bot
-echo "--- Menjalankan Bot di Docker ---"
-docker run -d \
-  --name bot-nangkring \
-  --restart always \
-  --net=host \
-  -e DiscordToken=$DISCORD_TOKEN \
-  kang-nangkring

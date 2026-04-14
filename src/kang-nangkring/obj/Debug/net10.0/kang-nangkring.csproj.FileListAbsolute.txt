@@ -1,0 +1,6 @@
+/workspaces/kang-nangkring/src/kang-nangkring/obj/Debug/net10.0/kang-nangkring.csproj.AssemblyReference.cache
+/workspaces/kang-nangkring/src/kang-nangkring/obj/Debug/net10.0/kang-nangkring.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/kang-nangkring/src/kang-nangkring/obj/Debug/net10.0/kang-nangkring.AssemblyInfoInputs.cache
+/workspaces/kang-nangkring/src/kang-nangkring/obj/Debug/net10.0/kang-nangkring.AssemblyInfo.cs
+/workspaces/kang-nangkring/src/kang-nangkring/obj/Debug/net10.0/kang-nangkring.csproj.CoreCompileInputs.cache
+/workspaces/kang-nangkring/src/kang-nangkring/obj/Debug/net10.0/kang-nangkring.sourcelink.json

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "CI+8qSd7t7I=",
+  "dgSpecHash": "slptKTWsLw8=",
   "success": true,
   "projectFilePath": "/workspaces/kang-nangkring/src/kang-nangkring/kang-nangkring.csproj",
   "expectedPackageFiles": [
@@ -21,6 +21,8 @@
     "/home/codespace/.nuget/packages/netcord.hosting.aspnetcore/1.0.0-alpha.484/netcord.hosting.aspnetcore.1.0.0-alpha.484.nupkg.sha512",
     "/home/codespace/.nuget/packages/netcord.hosting.services/1.0.0-alpha.484/netcord.hosting.services.1.0.0-alpha.484.nupkg.sha512",
     "/home/codespace/.nuget/packages/netcord.services/1.0.0-alpha.484/netcord.services.1.0.0-alpha.484.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.netcore.app.runtime.linux-x64/10.0.0/microsoft.netcore.app.runtime.linux-x64.10.0.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-x64/10.0.0/microsoft.aspnetcore.app.runtime.linux-x64.10.0.0.nupkg.sha512",
     "/home/codespace/.nuget/packages/microsoft.netcore.app.crossgen2.linux-x64/10.0.0/microsoft.netcore.app.crossgen2.linux-x64.10.0.0.nupkg.sha512"
   ],
   "logs": []
