@@ -15,9 +15,13 @@ public class KangNangkringCommand : ApplicationCommandModule<ApplicationCommandC
 
         EmbedProperties properties = new EmbedProperties();
         properties.WithTitle("📋 Daftar Perintah Kang Nangkring");
-        properties.WithDescription("- /kang-nangkring help : Menampilkan daftar perintah Kang Nangkring.");
-        properties.WithDescription("- /kang-nangkring setnongki <voice_channel> : Meluncur ke Voice Channel");
-        properties.WithDescription("- /kang-nangkring leave : Mengeluarkan bot dari voice channel.");
+
+        var description = 
+        "- `/kang-nangkring help` : Menampilkan daftar perintah Kang Nangkring.\n" +
+        "- `/kang-nangkring setnongki <voice_channel>` : Meluncur ke Voice Channel (TAB untuk autocomplete).\n" +
+        "- `/kang-nangkring leave` : Mengeluarkan bot dari voice channel.";
+
+        properties.WithDescription(description);
         await RespondAsync(InteractionCallback.Message(new InteractionMessageProperties().WithEmbeds([properties])));
     }
 
