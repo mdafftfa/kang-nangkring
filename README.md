@@ -1,113 +1,92 @@
-# ☕ Kang Nangkring
+# 🤖 Kang Nangkring Discord Bot
 
-Bot Discord sederhana 24/7 Nangkring di Voice Channel berbasis .NET untuk kebutuhan komunitas—ringan, cepat, dan cocok untuk pemula.
+Bot Discord sederhana 24/7 Nangkring di Voice Channel berbasis .NET Worker + NetCord.
+Cocok untuk server komunitas, voice, dan automation ringan.
 
 ---
 
-## 🚀 Cara Deploy (Linux Only)
+## 🚀 Fitur
+- Connect ke Discord Gateway
+- Support Application Commands
+- Fokus Guild & Voice State
+- Lightweight & optimized (R2R + PGO)
 
-Ikuti langkah ini dari awal sampai jalan:
+---
 
-### 1. Clone Repository
+## 📦 Requirement
+- Linux (Ubuntu / Debian / VPS / WSL)
+- .NET 10 SDK / Runtime
+- Git
+- Curl
 
-```bash
+---
+
+## 🔑 Setup Token Discord
+Ambil token dari:
+https://discord.com/developers/applications
+
+Saat menjalankan bot nanti:
+Masukkan Discord Token Anda:
+
+---
+
+## 📥 Cara Install & Run (Linux Only)
+
 git clone https://github.com/mdafftfa/kang-nangkring
 cd kang-nangkring
-```
-
-### 2. Jalankan Script
-
-```bash
 chmod +x start.sh
 ./start.sh
-```
 
 ---
 
-## 🔑 Masukkan Token Discord
+## ⚙️ Cara Kerja Script
 
-Saat menjalankan `start.sh`, kamu akan diminta:
-
-```
-Masukkan Discord Token Anda:
-```
-
-➡️ Paste token bot Discord kamu di sini.
-
----
-
-## ⚙️ Apa yang Script Lakukan?
-
-Script `start.sh` akan otomatis:
-
-* Cek apakah **.NET 10** sudah terinstall
-* Jika belum → akan install otomatis
-* Build project dengan optimasi:
-
-  * ✅ ReadyToRun (lebih cepat start)
-  * ✅ Tiered PGO (lebih optimal performa)
-* Menjalankan bot langsung
+start.sh akan:
+1. Minta input Discord Token
+2. Set environment variable Discord__Token
+3. Cek .NET 10 (auto install jika belum ada)
+4. Build & publish project
+5. Menjalankan bot
 
 ---
 
-## 📁 Struktur Singkat
+## 📁 Struktur Project
 
-```
-kang-nangkring/
-├── src/
-│   └── kang-nangkring/
-│       └── kang-nangkring.csproj
-├── start.sh
-└── README.md
-```
+src/
+ └── kang-nangkring/
+      ├── Program.cs
+      ├── Modules/
+      └── kang-nangkring.csproj
 
 ---
 
 ## 🧠 Catatan Penting
 
-* Bot menggunakan:
+Intents yang dipakai:
+- Guilds
+- Voice States
 
-  * Gateway Discord
-  * Application Commands (Slash Commands)
-* Intent yang aktif:
+Optimasi aktif:
+- Tiered Compilation
+- ReadyToRun (R2R Composite)
+- PGO
 
-  * Guilds
-  * Voice States
+---
+
+## 🧑‍🌾 Filosofi Kang Nangkring
+
+Bot ini dibuat ringan, santai, tapi tetap kerja keras.
+Seperti orang Jawa: nangkring tapi produktif 😄
 
 ---
 
 ## ❗ Troubleshooting
 
-### .NET tidak terdeteksi
-
-Tidak masalah — script akan install otomatis.
-
-### Bot tidak jalan
-
-Cek:
-
-* Token benar atau tidak
-* Bot sudah di-invite ke server
-* Permission sudah sesuai
+- Cek token Discord benar
+- Pastikan internet aktif
+- Pastikan .NET 10 terinstall
 
 ---
 
-## 💡 Tips Pemula
-
-* Gunakan VPS Linux (Ubuntu/Debian)
-* Simpan token dengan aman (jangan di-upload ke GitHub)
-* Restart bot kalau ada perubahan kode
-
----
-
-## 🎯 Tujuan Project
-
-Project ini dibuat biar:
-
-* Mudah dipahami pemula
-* Cepat langsung jalan
-* Bisa jadi dasar belajar bot Discord pakai .NET
-
----
-
-Selamat ngoding, lur! ☕
+## 📜 License
+Free untuk belajar & komunitas.
