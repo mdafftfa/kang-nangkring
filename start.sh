@@ -4,6 +4,14 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
+wget https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+
+# Update dan Install SDK 10
+apt-get update
+apt-get install -y dotnet-sdk-10.0
+
 # 2. Build image Docker (sangat cepat karena hanya COPY file saja)
 echo "--- Mengupdate Docker Image ---"
 docker build -t kang-nangkring .
