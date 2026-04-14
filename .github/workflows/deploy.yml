@@ -53,6 +53,8 @@ jobs:
             # Hapus container lama jika ada
             docker stop bot-nangkring 2>/dev/null || true
             docker rm bot-nangkring 2>/dev/null || true
+
+            export DISCORD_TOKEN='${{ secrets.DISCORD_TOKEN }}'
             
             # Jalankan bot baru
             # Note: Tambahkan --net=host jika bot butuh akses network VPS langsung
@@ -60,5 +62,5 @@ jobs:
               --name bot-nangkring \
               --restart always \
               --net=host \
-              -e DiscordToken="${{ secrets.DISCORD_TOKEN }}" \
+              -e DiscordToken="$DISCORD_TOKEN" \
               kang-nangkring
