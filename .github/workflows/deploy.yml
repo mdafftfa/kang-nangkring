@@ -59,4 +59,5 @@ jobs:
               --name bot-nangkring \
               --restart always \
               --net=host \
+              -e DiscordToken="${{ secrets.DISCORD_TOKEN }}" \
               kang-nangkring
