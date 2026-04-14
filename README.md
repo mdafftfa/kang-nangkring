@@ -1,6 +1,6 @@
 # 🤖 Kang Nangkring
 
-Bot Discord sederhana 24/7 Nangkring di Voice Channel berbasis .NET Worker + NetCord.
+Bot Discord sederhana 24/7 Nangkring di Voice Channel berbasis .NET Worker + [NetCord](https://github.com/NetCordDev/NetCord/).
 Cocok untuk server komunitas, voice, dan automation ringan.
 
 ---
