@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NetCord;
 using NetCord.Gateway;
 using NetCord.Rest;

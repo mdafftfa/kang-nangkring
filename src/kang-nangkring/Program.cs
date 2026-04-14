@@ -1,5 +1,3 @@
-using kang_nangkring;
-using Microsoft.Extensions.Hosting;
 using NetCord.Hosting.Gateway;
 using NetCord.Hosting.Services;
 using NetCord.Hosting.Services.ApplicationCommands;
