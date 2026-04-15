@@ -37,7 +37,7 @@ Masukkan Discord Token Anda:
 - `git clone https://github.com/mdafftfa/kang-nangkring`
 - `cd kang-nangkring`
 - `chmod +x start.sh`
-- `./start.sh`
+- `./start.sh` (Setup bot hingga selesai)
 - `CTRL + A + D` (Keluar dari screen)
 - `screen -x kang-nangkring` (Untuk masuk kembali ke screen kang-nangkring)
 
