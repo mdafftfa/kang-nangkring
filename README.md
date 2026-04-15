@@ -43,6 +43,16 @@ Masukkan Discord Token Anda:
 
 ---
 
+## Command
+
+| Command                                     | Deskripsi |
+|---------------------------------------------|-|
+| `/kang-nangkring help`                      | Menampilkan daftar semua perintah |
+| `/kang-nangkring setnongki {voice channel}` | Bot join ke voice channel yang dipilih |
+| `/kang-nangkring leave`                     | Bot keluar dari voice channel |
+
+---
+
 ## Cara Kerja Script
 
 start.sh akan:
